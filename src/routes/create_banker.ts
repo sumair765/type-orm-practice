@@ -1,33 +1,33 @@
 import express from "express"
-import { Client } from "../entities/Client"
+import { Banker } from "../entities/Banker"
 const router = express.Router()
 
 
-router.post('/api/client', async (req, res)=> {
+router.post('/api/banker', async (req, res)=> {
     const {
         firstName,
         middleName,
         lastName,
         email,
         cardNumber,
-        balance
+        employeeNumber
     } = req.body;
-
-  const client = Client.create({
+    
+  const banker = Banker.create({
     first_name: firstName,
     last_name: lastName,
     middle_name: middleName,
     email: email,
     card_number: cardNumber,
-    balance: balance
+    employee_number: employeeNumber
   })
 
-  await client.save();
+  await banker.save();
 
- return res.json(client)
+ return res.json(banker)
 });
 
 
 export {
-    router as createClientRouter
+    router as createBankerRouter
 }
