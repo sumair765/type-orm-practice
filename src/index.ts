@@ -6,6 +6,7 @@ import { Transaction } from "./entities/Transaction"
 import { createClientRouter } from "./routes/create_client"
 import { createBankerRouter } from "./routes/create_banker"
 import { createTransactionRouter } from "./routes/create_transaction"
+import { connectBankerToClientRouter } from "./routes/connect_banker_to_client"
 
 
 const app = express()
@@ -33,6 +34,7 @@ const app = express()
     app.use(createClientRouter)
     app.use(createBankerRouter)
     app.use(createTransactionRouter)
+    app.use(connectBankerToClientRouter)
 
     app.listen(8080, () => {
         console.log("Now running on port 8080")
