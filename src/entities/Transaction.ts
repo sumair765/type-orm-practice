@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne,JoinColumn, PrimaryGeneratedColumn} from "typeorm"
+import { BaseEntity, Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn} from "typeorm"
 import { Client } from "./Client"
 
 export enum TransactionTypes {
