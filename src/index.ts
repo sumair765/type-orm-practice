@@ -1,4 +1,4 @@
-import { createConnection } from "typeorm"
+import { DataSource } from "typeorm"
 import express, { application } from "express"
 import { Banker } from "./entities/Banker"
 import { Client } from "./entities/Client"
@@ -8,27 +8,29 @@ import { createBankerRouter } from "./routes/create_banker"
 import { createTransactionRouter } from "./routes/create_transaction"
 import { connectBankerToClientRouter } from "./routes/connect_banker_to_client"
 import { deleteClientRouter } from "./routes/delete_client"
+import { fetchClientRouter } from "./routes/fetch_clients"
 
 
 const app = express()
- 
+export const dataSource = new DataSource({
+    type: "postgres", 
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "bold",
+    database: "typeorm",
+    entities: [Client, Banker, Transaction],
+    synchronize: true
+
+})
 
  const main = async () => {
-
+    
+     
+ 
     try {
-        
-    const connection = await createConnection({
-        type: "postgres", 
-        host: "localhost",
-        port: 5432,
-        username: "postgres",
-        password: "bold",
-        database: "typeorm",
-        entities: [Client, Banker, Transaction],
-        synchronize: true
-
-    })
-
+    
+    await dataSource.initialize()
     console.log("connected to postgres")
 
     app.use(express.json())
@@ -37,6 +39,7 @@ const app = express()
     app.use(createTransactionRouter)
     app.use(connectBankerToClientRouter)
     app.use(deleteClientRouter) 
+    app.use(fetchClientRouter)
 
     app.listen(8080, () => {
         console.log("Now running on port 8080")
