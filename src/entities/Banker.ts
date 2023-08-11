@@ -3,6 +3,8 @@ import { Person } from "./utils/Person";
 import { Client } from "./Client";
 
 //Add comment
+
+//MORE COMMENTS FROM FEATURE BRANCH 1
 @Entity("banker")
 export class Banker extends Person {
 	@Column({
