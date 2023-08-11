@@ -5,6 +5,7 @@ import { Client } from "./Client";
 //Add comment
 
 //MORE COMMENTS FROM FEATURE BRANCH 1
+//MORE COMMENTS FROM FEATURE BRANCH 2
 @Entity("banker")
 export class Banker extends Person {
 	@Column({
