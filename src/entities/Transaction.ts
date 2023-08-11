@@ -14,6 +14,7 @@ export enum TransactionTypes {
 }
 
 // Addubg a comment to transactions.ts
+// Addubg a comment to transactions.ts 2
 
 @Entity("transactions")
 export class Transaction extends BaseEntity {
