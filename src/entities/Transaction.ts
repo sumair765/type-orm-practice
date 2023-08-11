@@ -1,40 +1,41 @@
-import { BaseEntity, Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn} from "typeorm"
-import { Client } from "./Client"
+import {
+	BaseEntity,
+	Column,
+	Entity,
+	ManyToOne,
+	JoinColumn,
+	PrimaryGeneratedColumn,
+} from "typeorm";
+import { Client } from "./Client";
 
 export enum TransactionTypes {
-    DEPOSIT = 'deposit',
-    WITHDRAW = 'widthdraw'
+	DEPOSIT = "deposit",
+	WITHDRAW = "widthdraw",
 }
 
+// Addubg a comment to transactions.ts
 
 @Entity("transactions")
 export class Transaction extends BaseEntity {
+	@PrimaryGeneratedColumn()
+	id: number;
 
+	@Column({
+		type: "enum",
+		enum: TransactionTypes,
+	})
+	type: string;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+	@Column({
+		type: "numeric",
+	})
+	amount: number;
 
-    @Column({
-        type: "enum",
-        enum: TransactionTypes
-    })
-    type: string
-
-    @Column({
-        type: "numeric"
-    })
-    amount: number
-
-    @ManyToOne(
-        () => Client,
-        client => client.transactions,{
-        onDelete: "CASCADE"
-        }
-        )
-
-    @JoinColumn({
-        name: 'client_id'
-    })
-    client: Client
-
+	@ManyToOne(() => Client, (client) => client.transactions, {
+		onDelete: "CASCADE",
+	})
+	@JoinColumn({
+		name: "client_id",
+	})
+	client: Client;
 }
